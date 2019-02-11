@@ -6,20 +6,20 @@ $("document").ready(function() {
       type: "good",
       hp: 250
     },
-    { name: "Han<br/>Solo", img: "./assets/33.png", type: "good", hp: 250 },
+    { name: "Han<br/>Solo", img: "./assets/33.png", type: "good", hp: 100 },
     {
       name: "Anakin<br/>Skywalker",
       img: "./assets/44.png",
       type: "good",
-      hp: 250
+      hp: 220
     },
-    { name: "Kylo<br/>Ren", img: "./assets/22.png", type: "evil", hp: 250 },
-    { name: "Darth<br/>Vader", img: "./assets/55.png", type: "evil", hp: 250 },
+    { name: "Kylo<br/>Ren", img: "./assets/22.png", type: "evil", hp: 120 },
+    { name: "Darth<br/>Vader", img: "./assets/55.png", type: "evil", hp: 300 },
     {
       name: "General<br/>Grievous",
       img: "./assets/66.png",
       type: "evil",
-      hp: 250
+      hp: 70
     }
   ];
   $(".directions").append(`<h4 class="style">Choose you Side :</h4>`);
@@ -46,7 +46,7 @@ $("document").ready(function() {
 
   $(".btn-c").on("click", function() {
     var player1 = $(this).attr("value");
-    var powerlevel1 = characters[player1].hp;
+    var powerlevel1 = characters[player1].hp; // var power level stored
     $(`.directions`).remove();
     $(`.${characters[player1].type}`).remove();
     $(`.characters`).removeClass("col-sx-2 p-0 m-2");
@@ -70,7 +70,9 @@ $("document").ready(function() {
     });
     $(".battle").addClass(`row m-auto`); //-----row for battle
 
-    $($player1div).append($player1img);
+    $($player1div)
+      .append($player1img)
+      .append(`<div class="powerlevel">HP : ${powerlevel1}</div>`);
 
     $(".battle")
       .append($player1div)
@@ -94,17 +96,18 @@ $("document").ready(function() {
           characters[player2].name
         }</h1>`
       );
-      var $button = $(`<button class=atk-button>Attack</button>`);
+      var $button = $(`<button id=atk-button>Attack</button>`);
       console.log(`${player2}`);
       $("h3").remove();
       var $selected = $(`#${player2}`)
         .children(".image")
         .clone();
       $(`#${player2}`).remove();
-      $(".player2div").append($selected);
+      $(".player2div")
+        .append($selected)
+        .append(`<div class="powerlevel">HP : ${powerlevel1}</div>`);
       $(".infodiv").append($button);
     });
   });
-
   //------------------------------------------------
 });

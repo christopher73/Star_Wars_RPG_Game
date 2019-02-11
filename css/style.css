@@ -1,6 +1,5 @@
 .background {
-  background: url("../assets/background.jpg") no-repeat;
-  background-size: 100% 100%;
+  background: url("../assets/background.jpg");
 }
 .style {
   color: rgb(231, 231, 0);
@@ -19,12 +18,14 @@
 }
 button {
   background-color: black;
+  border-style: solid;
   border-color: brown;
   letter-spacing: 3px;
   width: 100%;
 }
-.atk-button {
+#atk-button {
   color: red;
+  font-size: 1.5em;
 }
 p {
   font-size: 0.9em;
@@ -32,7 +33,13 @@ p {
   color: rgb(231, 231, 0);
   background-color: black;
 }
-
+.powerlevel {
+  color: red;
+  background-color: black;
+  font-size: 1.3em;
+  border-style: solid;
+  border-color: brown;
+}
 .infodiv p {
   font-size: 1.2em;
 }
@@ -43,6 +50,11 @@ p {
 .player1div img {
   height: 250px;
   width: 250px;
+}
+hr {
+  margin: 5%;
+  color: rgb(231, 231, 0);
+  background-color: rgb(231, 231, 0);
 }
 @font-face {
   font-family: "star_jediregular";
