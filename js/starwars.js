@@ -1,25 +1,46 @@
 $("document").ready(function() {
   var characters = [
     {
+      strength: 50,
       name: "Master<br/>Yoda",
       img: "./assets/11.png",
       type: "good",
-      hp: 250
+      hp: 300
     },
-    { name: "Han<br/>Solo", img: "./assets/33.png", type: "good", hp: 100 },
     {
+      strength: 30,
+      name: "Han<br/>Solo",
+      img: "./assets/33.png",
+      type: "good",
+      hp: 200
+    },
+    {
+      strength: 35,
       name: "Anakin<br/>Skywalker",
       img: "./assets/44.png",
       type: "good",
+      hp: 250
+    },
+    {
+      strength: 25,
+      name: "Kylo<br/>Ren",
+      img: "./assets/22.png",
+      type: "evil",
       hp: 220
     },
-    { name: "Kylo<br/>Ren", img: "./assets/22.png", type: "evil", hp: 120 },
-    { name: "Darth<br/>Vader", img: "./assets/55.png", type: "evil", hp: 300 },
     {
+      strength: 50,
+      name: "Darth<br/>Vader",
+      img: "./assets/55.png",
+      type: "evil",
+      hp: 300
+    },
+    {
+      strength: 4,
       name: "General<br/>Grievous",
       img: "./assets/66.png",
       type: "evil",
-      hp: 70
+      hp: 100
     }
   ];
   $(".directions").append(`<h4 class="style">Choose you Side :</h4>`);
@@ -46,7 +67,8 @@ $("document").ready(function() {
 
   $(".btn-c").on("click", function() {
     var player1 = $(this).attr("value");
-    var powerlevel1 = characters[player1].hp; // var power level stored
+    var life1 = characters[player1].hp; // var power level stored
+    var strength1 = characters[player1].strength;
     $(`.directions`).remove();
     $(`.${characters[player1].type}`).remove();
     $(`.characters`).removeClass("col-sx-2 p-0 m-2");
@@ -72,7 +94,8 @@ $("document").ready(function() {
 
     $($player1div)
       .append($player1img)
-      .append(`<div class="powerlevel">HP : ${powerlevel1}</div>`);
+      .append(`<div id="strength1">Strength : ${strength1}</div>`)
+      .append(`<div id="life1">HP : ${life1}</div>`);
 
     $(".battle")
       .append($player1div)
@@ -89,8 +112,10 @@ $("document").ready(function() {
     $(".btn-c").on("click", function() {
       $(".infodiv").empty();
       var player2 = $(this).val();
-      var powerlevel2 = characters[player2].hp;
-      console.log(powerlevel1, powerlevel2);
+      var life2 = characters[player2].hp;
+      var strength2 = characters[player2].strength;
+
+      console.log(life1, life2);
       $(".infodiv").append(
         `<h1 class="m-2 p-2">${characters[player1].name}<h1/>v.s.<h1>${
           characters[player2].name
@@ -105,8 +130,36 @@ $("document").ready(function() {
       $(`#${player2}`).remove();
       $(".player2div")
         .append($selected)
-        .append(`<div class="powerlevel">HP : ${powerlevel1}</div>`);
+        .append(`<div id="strength2">Strength : ${strength2}</div>`)
+        .append(`<div id="life2">HP : ${life2}</div>`);
       $(".infodiv").append($button);
+
+      $(".btn-c").off("click");
+
+      $("#atk-button").on("click", function() {
+        if (life1 > 0) {
+          strength1 = strength1 + characters[player1].strength;
+
+          if (life2 > 0) {
+            life2 = life2 - strength1;
+            life1 = life1 - strength2;
+          } else {
+            $(".btn-c").on("click");
+            $("#atk-button").off("click");
+          }
+          $("#strength1")
+            .empty()
+            .append(`<div id="strength1">Strength : ${strength1}</div>`);
+          $("#life2")
+            .empty()
+            .append(`<div id="life2">HP : ${life2}</div>`);
+          $("#life1")
+            .empty()
+            .append(`<div id="life1">HP : ${life1}</div>`);
+        } else {
+          console.log("gameover");
+        }
+      });
     });
   });
   //------------------------------------------------

@@ -25,7 +25,7 @@ button {
 }
 #atk-button {
   color: red;
-  font-size: 1.5em;
+  font-size: 1.8em;
 }
 p {
   font-size: 0.9em;
@@ -33,7 +33,14 @@ p {
   color: rgb(231, 231, 0);
   background-color: black;
 }
-.powerlevel {
+.player1div div {
+  color: red;
+  background-color: black;
+  font-size: 1.3em;
+  border-style: solid;
+  border-color: brown;
+}
+.player2div div {
   color: red;
   background-color: black;
   font-size: 1.3em;
