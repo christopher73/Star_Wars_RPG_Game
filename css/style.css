@@ -1,0 +1,53 @@
+.background {
+  background: url("../assets/background.jpg") no-repeat;
+  background-size: 100% 100%;
+}
+.style {
+  color: rgb(231, 231, 0);
+  letter-spacing: 3px;
+}
+.title {
+  font-size: 3.5em;
+}
+.image {
+  height: 150px;
+  width: 120px;
+  margin: 0;
+}
+.infodiv {
+  color: rgb(231, 231, 0);
+}
+button {
+  background-color: black;
+  border-color: brown;
+  letter-spacing: 3px;
+  width: 100%;
+}
+.atk-button {
+  color: red;
+}
+p {
+  font-size: 0.9em;
+  text-align: center;
+  color: rgb(231, 231, 0);
+  background-color: black;
+}
+
+.infodiv p {
+  font-size: 1.2em;
+}
+.player2div img {
+  height: 250px;
+  width: 250px;
+}
+.player1div img {
+  height: 250px;
+  width: 250px;
+}
+@font-face {
+  font-family: "star_jediregular";
+  src: url("../assets/font/starjedi-webfont.woff2") format("woff2"),
+    url("../assets/font/starjedi-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
