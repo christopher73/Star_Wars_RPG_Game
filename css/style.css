@@ -6,7 +6,9 @@
   letter-spacing: 3px;
 }
 .title {
+  text-align: center;
   font-size: 3.5em;
+  margin: auto;
 }
 .image {
   height: 150px;
@@ -16,36 +18,48 @@
 .infodiv {
   color: rgb(231, 231, 0);
 }
-button {
+.characters button {
   background-color: black;
   border-style: solid;
-  border-color: brown;
+  border-width: thick;
   letter-spacing: 3px;
   width: 100%;
+  border-radius: 12px;
 }
-#atk-button {
+.good button {
+  border-color: rgb(101, 157, 240);
+}
+.evil button {
+  border-color: rgb(254, 74, 74);
+}
+.atk-button {
+  padding: 20px;
   color: red;
-  font-size: 1.8em;
+  border-color: red;
+  background-color: black;
+  font-size: 2.2em;
+  border-radius: 12px;
 }
 p {
   font-size: 0.9em;
   text-align: center;
   color: rgb(231, 231, 0);
-  background-color: black;
 }
-.player1div div {
-  color: red;
+.evil div {
+  color: rgb(254, 74, 74);
   background-color: black;
   font-size: 1.3em;
   border-style: solid;
-  border-color: brown;
+  border-color: rgb(254, 74, 74);
+  border-radius: 12px;
 }
-.player2div div {
-  color: red;
+.good div {
+  color: rgb(101, 157, 240);
   background-color: black;
   font-size: 1.3em;
   border-style: solid;
-  border-color: brown;
+  border-color: rgb(101, 157, 240);
+  border-radius: 12px;
 }
 .infodiv p {
   font-size: 1.2em;

@@ -5,42 +5,42 @@ $("document").ready(function() {
       name: "Master<br/>Yoda",
       img: "./assets/11.png",
       type: "good",
-      hp: 300
+      hp: 600
     },
     {
       strength: 30,
       name: "Han<br/>Solo",
       img: "./assets/33.png",
       type: "good",
-      hp: 200
+      hp: 400
     },
     {
       strength: 35,
       name: "Anakin<br/>Skywalker",
       img: "./assets/44.png",
       type: "good",
-      hp: 250
+      hp: 300
     },
     {
       strength: 25,
       name: "Kylo<br/>Ren",
       img: "./assets/22.png",
       type: "evil",
-      hp: 220
+      hp: 440
     },
     {
       strength: 50,
       name: "Darth<br/>Vader",
       img: "./assets/55.png",
       type: "evil",
-      hp: 300
+      hp: 600
     },
     {
-      strength: 4,
+      strength: 40,
       name: "General<br/>Grievous",
       img: "./assets/66.png",
       type: "evil",
-      hp: 100
+      hp: 220
     }
   ];
   $(".directions").append(`<h4 class="style">Choose you Side :</h4>`);
@@ -82,7 +82,7 @@ $("document").ready(function() {
     });
     //----declare div for player 1 && player 2 and info div
     var $player1div = $("<div>", {
-      class: `col-sx-4 p-2 m-auto player1div`
+      class: `col-sx-4 p-2 m-auto player1div ${characters[player1].type}`
     });
     var $infodiv = $("<div>", {
       class: `col-sx-4 p-2 m-auto infodiv`
@@ -106,7 +106,7 @@ $("document").ready(function() {
     $(".infodiv").append(
       `<h1 class="m-2 p-2">${
         characters[player1].name
-      }</h1>v.s.<h1>???<h1/> <h4>Select figther :</h4>`
+      }</h1>v.s.<h1>???</h1><h4>Select figther :</h4>`
     );
     //-------------------------------------------------
     $(".btn-c").on("click", function() {
@@ -117,11 +117,10 @@ $("document").ready(function() {
 
       console.log(life1, life2);
       $(".infodiv").append(
-        `<h1 class="m-2 p-2">${characters[player1].name}<h1/>v.s.<h1>${
+        `<h1 class="m-2 p-2">${characters[player1].name}</h1>v.s.<h1>${
           characters[player2].name
         }</h1>`
       );
-      var $button = $(`<button id=atk-button>Attack</button>`);
       console.log(`${player2}`);
       $("h3").remove();
       var $selected = $(`#${player2}`)
@@ -129,38 +128,98 @@ $("document").ready(function() {
         .clone();
       $(`#${player2}`).remove();
       $(".player2div")
+        .addClass(characters[player2].type)
         .append($selected)
         .append(`<div id="strength2">Strength : ${strength2}</div>`)
         .append(`<div id="life2">HP : ${life2}</div>`);
-      $(".infodiv").append($button);
+
+      var $button = $("<button>") //add attack button
+        .addClass("atk-button")
+        .append("$ attack #");
+
+      $(".player1div").append($button);
 
       $(".btn-c").off("click");
 
-      $("#atk-button").on("click", function() {
-        if (life1 > 0) {
-          strength1 = strength1 + characters[player1].strength;
-
-          if (life2 > 0) {
-            life2 = life2 - strength1;
-            life1 = life1 - strength2;
-          } else {
-            $(".btn-c").on("click");
-            $("#atk-button").off("click");
-          }
+      var tmp_strength1 = 0;
+      var tmp_strength2 = characters[player2].strength;
+      var tmp_life1 = life1;
+      var tmp_life2 = life2;
+      // attack funtion button -----------------------
+      $(".atk-button").on("click", function() {
+        // strength1
+        // life1
+        // life2
+        function show(fstrength1, flife1, flife2) {
           $("#strength1")
             .empty()
-            .append(`<div id="strength1">Strength : ${strength1}</div>`);
-          $("#life2")
-            .empty()
-            .append(`<div id="life2">HP : ${life2}</div>`);
+            .append(`<div id="strength1">Strength : ${fstrength1}</div>`);
           $("#life1")
             .empty()
-            .append(`<div id="life1">HP : ${life1}</div>`);
+            .append(`<div id="life1">HP : ${flife1}</div>`);
+          $("#life2")
+            .empty()
+            .append(`<div id="life2">HP : ${flife2}</div>`);
+        }
+        function next() {
+          $(".player2div").append(`<p>select next contender</p>`);
+          $(".btn-c").on("click", function() {
+            var newplayer2 = $(this).val();
+
+            var newlife2 = characters[newplayer2].hp;
+            strength2 = characters[newplayer2].strength;
+            $(".infodiv").empty();
+
+            $(".infodiv").append(
+              `<h1 class="m-2 p-2">${characters[player1].name}</h1>v.s.<h1>${
+                characters[newplayer2].name
+              }</h1>`
+            );
+
+            var $selected = $(`#${newplayer2}`)
+              .children(".image")
+              .clone();
+            $(`.player2div`).empty();
+            $(".player2div")
+              .addClass(characters[newplayer2].type)
+              .append($selected)
+              .append(`<div id="strength2">Strength : ${strength2}</div>`)
+              .append(`<div id="life2">HP : ${newlife2}</div>`);
+            $(`#${newplayer2}`).remove();
+            console.log("inside = " + characters[newplayer2].hp);
+            $(".btn-c").off("click");
+            return characters[newplayer2].hp;
+          });
+        }
+
+        // var tmp_strength1 = 0;
+        // var tmp_strength2 = characters[player2].strength;
+        // var tmp_life1 = life1;
+        // var tmp_life2 = life2;
+        tmp_strength1 = tmp_strength1 + characters[player1].strength;
+        console.log(tmp_life1 + " life2 = " + tmp_life2);
+        tmp_life1 = tmp_life1 - tmp_strength2;
+        tmp_life2 = tmp_life2 - tmp_strength1;
+
+        if (tmp_life1 < 0) {
+          //win player 2
+          show(tmp_strength1 + tmp_strength1, 0, tmp_life2);
+        } else if (tmp_life2 < 0) {
+          //win player 1
+          show(tmp_strength1 + tmp_strength1, tmp_life1, 0);
+
+          tmp_life2 = async function() {
+            //var new1 = next();
+            return await next();
+          };
+          //tmp_life2 = life2;
+          console.log(tmp_life1 + " if life2 = " + tmp_life2);
         } else {
-          console.log("gameover");
+          show(tmp_strength1 + tmp_strength1, tmp_life1, tmp_life2);
         }
       });
+
+      //------------------------------------------------
     });
   });
-  //------------------------------------------------
 });
